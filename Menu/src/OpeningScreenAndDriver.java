@@ -2,13 +2,15 @@ import javax.swing.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
+import java.util.ArrayList;
 
 public class OpeningScreenAndDriver {
-	private static EventDay myDay ;//= setDay();
+	private static EventDay myDay ;
 
-	/*private static setDay(){
+	private static void viewMeals(){
+		ArrayList<Dish> theStuff = myDay.getTheStuff();
 		
-	}_*/
+	}
 	public static void main(String[] args) throws IOException{
 		boolean cont;
 		Input take = new Input();
@@ -32,7 +34,7 @@ public class OpeningScreenAndDriver {
 				String date = take.getString("What is the date? (ddmmyyyy)");
 				myDay = new EventDay(leader, date);
 			} else if(response == 1){
-				
+				viewMeals();
 			} else if(response == 2){
 				myDay.displayShoppingList();
 				

@@ -3,6 +3,9 @@ import java.util.*;
 public class Output {
 
 	public Output(){}
+	public boolean printDish(Dish dish){
+		
+	}
 	
 	public boolean printStringArray(ArrayList<String> list, String title){
 		String message = "";
