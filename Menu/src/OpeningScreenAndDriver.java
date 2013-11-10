@@ -9,6 +9,7 @@ public class OpeningScreenAndDriver {
 
 	private static void viewMeals(){
 		ArrayList<Dish> theStuff = myDay.getTheStuff();
+		Output give = new Output();
 		
 	}
 	public static void main(String[] args) throws IOException{
