@@ -19,7 +19,7 @@ public class OpeningScreenAndDriver {
 		cont = true;
 		while(cont){
 			int response = JOptionPane.showOptionDialog(null,
-					"Welcome to the Holy Ghost Cooking Club webApp.  What would you like to do?",
+					"Welcome to the Holy Ghost Cooking Club JavaApp.  What would you like to do?",
 					"Welcome",
 					JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE,
