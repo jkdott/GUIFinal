@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 
-package calandar;
 
+
+import static com.oracle.jrockit.jfr.ContentType.Address;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import day.EventDay;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.sql.Blob;
@@ -23,11 +25,11 @@ import java.sql.SQLException;
 public class EventGetter {
     private ArrayList<EventDay> fromTable;
     private Connection con;
-    public EventGetter(Connection con) throws SQLException, IOException{
+    public EventGetter(Connection con) throws SQLException, IOException, ClassNotFoundException{
         this.con = con;
         fromTable = extract(con);
     }
-    private ArrayList<EventDay> extract(Connection con) throws SQLException, IOException{
+    private ArrayList<EventDay> extract(Connection con) throws SQLException, IOException, ClassNotFoundException{
         PreparedStatement state = con.prepareStatement("SELECT Date"
                 + " FROM DATES.EVENTS WHERE DATE(NOW()) <= Date");
         ResultSet dates = state.executeQuery();
@@ -35,14 +37,15 @@ public class EventGetter {
                 + " FROM DATES.EVENTS WHERE DATE(NOW()) <= Date");
         ResultSet blobs = state2.executeQuery();
         ArrayList<Blob> serials = new ArrayList<Blob>();
+        ArrayList<EventDay> answer = new ArrayList<EventDay>();
         while(blobs.next()){
             byte[] stream1 = blobs.getBlob(1).getBytes(1, (int) (blobs.getBlob(1).length()-1));
             ObjectInputStream stream = new ObjectInputStream(new ByteArrayInputStream(stream1));
-            EventDay thing = stream.readObject();
-          stream.close();
+            EventDay day = (EventDay) stream.readObject();
+            answer.add(day);
+            stream.close();
         }
-        ObjectInputStream stream = new ObjectInputStream(new ByteArrayInputStream());
-        EventDay = (String) stream.readObject();
-          stream.close();
+        return answer;
+        
     }
 }
